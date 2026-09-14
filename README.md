@@ -1,6 +1,6 @@
 # ContestForge-R
 
-ContestForge-R is a dependency-free Python starter for generating and
+ContestForge-R is a dependency-free Python starter for defining and
 evaluating programming-contest problems. It makes each experiment auditable:
 define a typed `ProblemSpec`, compare an executable reference against a
 brute-force oracle, measure a population of candidate solvers, and turn the
@@ -30,12 +30,11 @@ problem.
 # Print the JSON Schema and validate a spec can be loaded
 contestforge validate examples/sum_pairs.json
 
-# Verify reference and brute-force programs on a JSON array of cases
-printf '%s' '[{"numbers":[1,2,3,4],"target":5}]' > /tmp/cases.json
-contestforge verify examples/sum_pairs.json /tmp/cases.json
+# Verify reference and brute-force programs on the bundled cases
+contestforge verify examples/sum_pairs.json examples/cases.json
 
 # Estimate difficulty from the solver population in the spec metadata
-contestforge estimate examples/sum_pairs.json /tmp/cases.json
+contestforge estimate examples/sum_pairs.json examples/cases.json
 ```
 
 The Python API exposes the same building blocks:
@@ -57,8 +56,9 @@ container or sandbox isolation for untrusted code.
 ## GitHub Pages
 
 The repository workflow is [`.github/workflows/pages.yml`](.github/workflows/pages.yml).
-It uploads `docs/` with the official Pages artifact/deploy actions and attempts
-to enable Pages automatically. Merge the workflow into `main` and allow the
-workflow to run; subsequent pushes to `main` publish the site at the project
-URL above. If repository policies prevent automatic enablement, set
-**Pages → Build and deployment → Source** to **GitHub Actions** once.
+It uploads `docs/` with the official Pages artifact/deploy actions. Before the
+first deployment, set **Settings → Pages → Build and deployment → Source** to
+**GitHub Actions** once. The workflow uses the default `GITHUB_TOKEN`, which
+cannot enable Pages through the action; after the one-time setting, pushes to
+`main` that change `docs/` or the workflow deploy the site. You can also run
+the workflow manually with **Actions → Deploy Pages site → Run workflow**.
