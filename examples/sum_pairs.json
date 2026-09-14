@@ -1,0 +1,12 @@
+{
+  "id": "sum-pairs",
+  "title": "Count target pairs",
+  "statement": "Count pairs of distinct positions whose values sum to target.",
+  "input_format": "JSON object with numbers and target.",
+  "output_format": "A JSON integer.",
+  "constraints": ["1 <= len(numbers) <= 1000"],
+  "examples": [{"input": {"numbers": [1, 2, 3, 4], "target": 5}, "output": 2}],
+  "reference_solution": "examples/sum_pairs.py",
+  "brute_force_solution": "examples/sum_pairs_brute.py",
+  "metadata": {"solvers": {"reference": "examples/sum_pairs.py"}}
+}

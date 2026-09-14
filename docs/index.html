@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="ContestForge-R is a reproducible research harness for generating and evaluating programming problems.">
+    <title>ContestForge-R | Research-grade problem generation</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="nav shell">
+      <a class="brand" href="#top" aria-label="ContestForge-R home"><span class="brand-mark">CF</span> ContestForge<span>-R</span></a>
+      <nav aria-label="Primary navigation">
+        <a href="#loop">Loop</a>
+        <a href="#architecture">Architecture</a>
+        <a href="#quickstart">Quick start</a>
+        <a class="nav-cta" href="https://github.com/KrAzad0/CodeForce">View on GitHub</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero shell">
+        <div class="hero-copy">
+          <p class="eyebrow">OPEN RESEARCH STARTER · PYTHON</p>
+          <h1>Generate better problems.<br><em>Prove they work.</em></h1>
+          <p class="lede">ContestForge-R turns problem generation into a measurable loop: define a structured spec, verify an oracle against a brute-force model, stress-test candidate solvers, and score the result.</p>
+          <div class="hero-actions">
+            <a class="button primary" href="#quickstart">Run the pipeline <span>→</span></a>
+            <a class="button secondary" href="https://github.com/KrAzad0/CodeForce">Read the source</a>
+          </div>
+          <div class="signal-row" aria-label="Project properties">
+            <span><b>01</b> Reproducible</span><span><b>02</b> Executable checks</span><span><b>03</b> Solver-aware</span>
+          </div>
+        </div>
+        <div class="hero-art" aria-label="Pipeline visualization">
+          <div class="orbit orbit-a"></div><div class="orbit orbit-b"></div>
+          <div class="terminal-card">
+            <div class="terminal-top"><i></i><i></i><i></i><span>contestforge run</span></div>
+            <pre><code><span class="muted">$</span> contestforge example --seed 17
+
+  <span class="green">✓</span> schema validated
+  <span class="green">✓</span> reference ↔ brute force
+  <span class="green">✓</span> 120 stress cases passed
+  <span class="blue">→</span> difficulty   <strong>0.68</strong>
+  <span class="blue">→</span> reward       <strong>0.91</strong>
+
+  <span class="prompt">ready for the next candidate_</span></code></pre>
+          </div>
+          <div class="hero-badge">SPEC → EVIDENCE<br><strong>not vibes</strong></div>
+        </div>
+      </section>
+
+      <section class="stats shell">
+        <div><strong>4</strong><span>stages in the core loop</span></div>
+        <div><strong>2</strong><span>independent correctness signals</span></div>
+        <div><strong>0</strong><span>runtime dependencies for Pages</span></div>
+        <div><strong>100%</strong><span>local-first experiment control</span></div>
+      </section>
+
+      <section class="section shell" id="loop">
+        <div class="section-heading"><p class="eyebrow">THE FEEDBACK LOOP</p><h2>Every generated task<br>leaves a trail.</h2></div>
+        <div class="loop-grid">
+          <article class="loop-card"><span class="step">01</span><div class="icon">✦</div><h3>Generate</h3><p>Sample a typed <code>ProblemSpec</code> with constraints, objectives, and a deterministic seed.</p><span class="tag">structured JSON</span></article>
+          <article class="loop-card"><span class="step">02</span><div class="icon">⌁</div><h3>Verify</h3><p>Execute the reference and brute-force oracle as isolated subprocesses with a hard timeout.</p><span class="tag">executable evidence</span></article>
+          <article class="loop-card"><span class="step">03</span><div class="icon">◎</div><h3>Stress-test</h3><p>Run a population of candidate solvers across generated cases and classify their failures.</p><span class="tag">failure taxonomy</span></article>
+          <article class="loop-card"><span class="step">04</span><div class="icon">↗</div><h3>Score</h3><p>Combine correctness, difficulty, diversity, and clarity into a reward for the next round.</p><span class="tag">research metric</span></article>
+        </div>
+      </section>
+
+      <section class="section dark" id="architecture">
+        <div class="shell architecture">
+          <div class="section-heading"><p class="eyebrow">COMPOSABLE BY DESIGN</p><h2>Small modules.<br>Strong contracts.</h2><p>Swap generators, solvers, and reward functions without losing the experiment record.</p></div>
+          <div class="architecture-map">
+            <div class="map-node accent"><small>INPUT</small><strong>ProblemSpec</strong><span>schema + seed</span></div>
+            <div class="map-line"></div><div class="map-node"><small>ORACLE</small><strong>Verifier</strong><span>subprocess boundary</span></div>
+            <div class="map-line"></div><div class="map-node"><small>POPULATION</small><strong>Solvers</strong><span>difficulty signal</span></div>
+            <div class="map-line"></div><div class="map-node accent"><small>OUTPUT</small><strong>Reward</strong><span>JSON report</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section shell quickstart" id="quickstart">
+        <div class="section-heading"><p class="eyebrow">GET MOVING</p><h2>One install.<br>One command.</h2><p>Everything needed to reproduce the example lives in the repository.</p></div>
+        <div class="code-panel"><div class="code-tabs"><span class="active">terminal</span><span>python API</span></div><pre><code><span class="muted"># clone and install</span>
+git clone https://github.com/KrAzad0/CodeForce.git
+cd CodeForce
+python -m venv .venv && source .venv/bin/activate
+pip install -e ".[dev]"
+
+<span class="muted"># validate the bundled problem</span>
+contestforge example --seed 17
+pytest -q</code></pre><button class="copy" type="button" data-copy="contestforge example --seed 17">Copy command</button></div>
+      </section>
+
+      <section class="status shell">
+        <div><p class="eyebrow">PROJECT STATUS</p><h2>Early, explicit, extensible.</h2></div>
+        <p>The starter kit establishes the contracts and measurement loop. Research integrations—learned generators, richer solver populations, and benchmark suites—can land as independent modules.</p>
+        <a class="button secondary" href="https://github.com/KrAzad0/CodeForce/issues">See the roadmap <span>↗</span></a>
+      </section>
+    </main>
+    <footer class="shell footer"><span>© 2026 ContestForge-R</span><span>Built for careful experiments.</span><a href="https://github.com/KrAzad0/CodeForce">GitHub ↗</a></footer>
+    <script src="script.js"></script>
+  </body>
+</html>
