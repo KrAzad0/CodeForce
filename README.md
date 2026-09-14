@@ -57,7 +57,8 @@ container or sandbox isolation for untrusted code.
 ## GitHub Pages
 
 The repository workflow is [`.github/workflows/pages.yml`](.github/workflows/pages.yml).
-It uploads `docs/` with the official Pages artifact/deploy actions. In the
-repository settings, set **Pages → Build and deployment → Source** to
-**GitHub Actions** once; subsequent pushes to `main` publish the site at the
-project URL above.
+It uploads `docs/` with the official Pages artifact/deploy actions and attempts
+to enable Pages automatically. Merge the workflow into `main` and allow the
+workflow to run; subsequent pushes to `main` publish the site at the project
+URL above. If repository policies prevent automatic enablement, set
+**Pages → Build and deployment → Source** to **GitHub Actions** once.
